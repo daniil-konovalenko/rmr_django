@@ -33,6 +33,8 @@ CACHE_MIDDLEWARE_SECONDS = 0
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
     'rmr',
 )
 

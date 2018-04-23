@@ -5,13 +5,12 @@ from unittest import mock
 
 import django.test
 from django import forms
-from django.conf.urls import url
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.core.urlresolvers import reverse
 from django.test.utils import override_settings
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 
+from rmr.compat import re_path, reverse
 from rmr.errors import ClientError, ServerError
 from rmr.utils.test import data_provider, DataSet, Parametrized, Client
 from rmr.views import Json
@@ -92,13 +91,13 @@ class ValidationFile(Json):
 
 
 urlpatterns = [
-    url(r'warning$', JsonWithWarning.as_view(), name='warning'),
-    url(r'error$', JsonWithError.as_view(), name='error'),
-    url(r'ok$', JsonWithoutError.as_view(), name='ok'),
-    url(r'cache$', CacheJson.as_view(), name='cache'),
-    url(r'last_modified$', CacheJson.as_view(), name='last_modified'),
-    url(r'validate$', ValidationJson.as_view(), name='validate'),
-    url(r'validate_file$', ValidationFile.as_view(), name='validate_file'),
+    re_path(r'warning$', JsonWithWarning.as_view(), name='warning'),
+    re_path(r'error$', JsonWithError.as_view(), name='error'),
+    re_path(r'ok$', JsonWithoutError.as_view(), name='ok'),
+    re_path(r'cache$', CacheJson.as_view(), name='cache'),
+    re_path(r'last_modified$', CacheJson.as_view(), name='last_modified'),
+    re_path(r'validate$', ValidationJson.as_view(), name='validate'),
+    re_path(r'validate_file$', ValidationFile.as_view(), name='validate_file'),
 ]
 
 dummy_setter = property(fset=lambda *_: None)

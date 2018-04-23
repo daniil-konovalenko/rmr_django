@@ -7,6 +7,7 @@ from django.views.generic import View
 
 import rmr.views
 
+from rmr.compat import re_path
 from rmr.utils.test import data_provider, DataSet, Parametrized
 
 
@@ -23,8 +24,8 @@ class MultipleValuesJsonView(View):
 
 
 urlpatterns = [
-    url(r'simple', lambda request: django.http.JsonResponse(request.POST, safe=False)),
-    url(r'multiple', MultipleValuesJsonView.as_view()),
+    re_path(r'simple', lambda request: django.http.JsonResponse(request.POST, safe=False)),
+    re_path(r'multiple', MultipleValuesJsonView.as_view()),
 ]
 
 
